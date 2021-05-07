@@ -1,0 +1,7 @@
+@media (max-width: 767px) and (min-width: 320px){
+	.sec2 .inner-box .image-box.image-one {
+    position: relative;
+    margin: 0 20px 0 4px;
+    box-shadow: 0 11px 29px 0 rgba(0,0,0,.3);
+	}
+}

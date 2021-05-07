@@ -1,0 +1,507 @@
+ application/x-httpd-php calculation.html ( PHP script text )
+<?php include("superadmin/includes/myconfig.html")?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SHIPMA | Parcel</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/innerpages.css">
+    <link rel="stylesheet" type="text/css" href="css/glyphicon.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="img/header.png" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_nav" aria-controls="mobile_nav" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span> 
+        </button>
+            <div class="collapse navbar-collapse" id="mobile_nav">
+                <!-- <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-md-right">
+	        </ul> -->
+                <ul class="navbar-nav navbar-light">
+                    <li class="nav-item dropdown"><a class="nav-link" href="about-us.html">About Us</a></li>
+                    <li class="nav-item dmenu dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                Services <i class=""></i><span></a>
+                        <div class="dropdown-menu sm-menu border-top" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="parcel.html"> Parcel</a>
+                            <a class="dropdown-item" href="part-load.html"> Part Load</a>
+                            <a class="dropdown-item" href="full-load.html"> Full Load</a>
+                            <a class="dropdown-item" href="on-demand.html"> On Demand</a>
+                            <a class="dropdown-item" href="warehousing-and-storage.html"> Warehousing & Storage</a>
+                            <a class="dropdown-item" href="bike-transport.html"> Bike Transport</a>
+                            <a class="dropdown-item" href="car-transport.html"> Car Transport</a>
+                            <a class="dropdown-item" href="house-shifting.html">Domestic House Shifting</a>
+                            <a class="dropdown-item" href="office-shifting.html"> Office Shifting</a>
+                            <a class="dropdown-item" href="international-moving.html"> International Moving</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="tracking.html">Tracking</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="terms-and-condithions.html">T&C</a></li>
+                    <li class="nav-item dropdown mt-4"><a class="call-btn" href="#">Login</a></li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+
+
+
+
+    <?php 
+		$package_type= $_GET['package_type'];
+		$from_pincode= $_GET['from_pincode'];
+		$to_pincode= $_GET['to_pincode'];
+		
+		$sql= "select * from tbl_location where pickup_pincode= '".$from_pincode."'  and delivery_pincode=  '".$to_pincode."' ";
+		$query= $mysqli->query($sql);
+		$numrows= mysqli_num_rows($query);
+		
+		?>
+
+
+
+
+    <section class="banner-section">
+        <h1>Parcel</h1>
+    </section>
+
+    <section class="py-5 in-search">
+        <?php if($numrows>0){
+		$rows= mysqli_fetch_assoc($query);
+		$pickup_city=$rows['pickup_city'];
+		$delivery_city=$rows['delivery_city'];
+		$pickup_pincode=$rows['pickup_pincode'];
+		$delivery_pincode=$rows['delivery_pincode'];
+		$distance=$rows['distance'];
+		$fare=$rows['fare'];
+		$transit_time=$rows['transit_time'];
+		$oda_city=$rows['oda_city'];
+		$oda_fare=$rows['oda_fare'];
+		$oda_time=$rows['oda_time'];
+		
+
+		
+		if(isset($_POST['from_pincode'])){
+
+		$from_pincode= 	$_POST['from_pincode'];
+		$to_pincode= 	$_POST['to_pincode'];
+		$distance= 	$_POST['distance'];
+		
+		$piece= 	$_POST['piece'];
+		$weight= 	$_POST['weight'];
+		$length= 	$_POST['length'];
+		$width= 	$_POST['width'];
+		$height= 	$_POST['height'];
+		
+$chargeableweight= (($length*$width*$height)/1728)*10;
+$chargeableweight = round($chargeableweight,2);
+$payableamt=  round($fare*$chargeableweight,2);
+$totalamt= $payableamt+$chargeableweight;
+
+		
+		
+		
+		$sender_name= 	$_POST['sender_name'];
+		$sender_email= 	$_POST['sender_email'];
+		$sender_phone= 	$_POST['sender_phone'];
+		$sender_address= 	$_POST['sender_address'];
+		
+		
+		$reciever_name= 	$_POST['reciever_name'];
+		$reciever_email= 	$_POST['reciever_email'];
+		$reciever_phone= 	$_POST['reciever_phone'];
+		$reciever_address= 	$_POST['reciever_address'];
+		$reciever_date= 	$_POST['reciever_date'];
+		$order_date= 	date('Y-m-d');
+		$status= 1;
+		
+		$sql1= "insert into tbl_order set 
+		
+		pickup_city= '".$pickup_city."',
+		delivery_city= '".$delivery_city."',
+		pickup_pincode= '".$pickup_pincode."',
+		delivery_pincode= '".$delivery_pincode."',
+		distance= '".$distance."',
+		fare= '".$fare."',
+		transit_time= '".$transit_time."',
+		oda_city= '".$oda_city."',
+		oda_time= '".$oda_time."',
+		piece= '".$piece."',
+		weight= '".$weight."',
+		length= '".$length."',
+		width= '".$width."',
+		height= '".$height."',
+		chargeableweight= '".$chargeableweight."',
+		payableamt= '".$payableamt."',
+		oda_fare= '".$chargeableweight."',
+		total_amount= '".$totalamt."',
+		
+		
+		
+		
+		sender_name= '".$sender_name."',
+		sender_email= '".$sender_email."',
+		sender_phone= '".$sender_phone."',
+		sender_address= '".$sender_address."',
+		
+		reciever_name= '".$reciever_name."',
+		reciever_email= '".$reciever_email."',
+		reciever_phone= '".$reciever_phone."',
+		reciever_address= '".$reciever_address."',
+		reciever_date= '".$reciever_date."',
+		order_date= '".$order_date."',
+		status= '1' ";
+		
+		$query1= $mysqli->query($sql1);
+		$order_id = $mysqli->insert_id;
+		
+		if($order_id>0){
+			
+			
+			
+			
+			
+		
+		
+				
+		
+		
+		
+			
+			
+			
+header("Location:thanks.html");exit;			
+			
+		
+		}	
+			
+			
+		}
+		
+			
+		
+		
+
+		
+		?>
+
+
+        <form class="form-horizontal" method="POST" name="frmsubmit" id="frmsubmit" action="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <?=$pickup_city?>(
+                            <?=$pickup_pincode?>) To
+                                <?=$delivery_city?>(
+                                    <?=$delivery_pincode?>)</div>
+
+                    <div class="col-md-3">Distance:
+                        <?=$distance?> KM</div>
+                    <div class="col-md-3">Transit Time:
+                        <?=$transit_time?>
+                    </div>
+                    <input type="hidden" name="from_pincode" value="<?=$from_pincode?>">
+                    <input type="hidden" name="to_pincode" value="<?=$to_pincode?>">
+                    <input type="hidden" name="distance" value="<?=$distance?>">
+                    <input type="hidden" name="price" value="<?=$price?>">
+                </div>
+                <div class="row h-100 align-items-center">
+
+                    <div class="col-12">
+                        <div class="search-sec mt-5">
+
+                            <div class="inc">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="piece">Total Piece</label>
+                                            <input type="text" class="form-control" name="piece" id="piece" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="weight">Total Weight</label>
+                                            <input type="text" class="form-control" name="weight" id="weight" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="length">Length in cm</label>
+                                            <input type="text" class="form-control" name="length" id="length" required onkeyup="cleardatavalue()">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="width">Width in cm</label>
+                                            <input type="text" class="form-control" name="width" id="width" required onkeyup="cleardatavalue()">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="height">Height in cm</label>
+                                            <input type="text" class="form-control" name="height" id="height" required onkeyup="cleardatavalue()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="email">&nbsp;</label>
+                                            <button type="button" class="btn btn-primary" onclick="proceed();">Proceed</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="result"></div>
+                        <div class="addressinfo" id="addressinfo" style="display:none;">
+
+                            <div class="row">
+                                <!--==========================================collecton address========================================-->
+                                <div class="col-md-6">
+                                    <div class="colle_box">
+                                        <h2>1. Collection Address</h2>
+                                        <div class="form-group">
+                                            <label for="usr">Name <span class="red">*</span></label>
+                                            <input type="text" class="form-control" id="sender_name" name="sender_name" value="" required>
+                                            <span id="alert_sender_name" class="bold_alert"></span> </div>
+                                        <div class="form-group">
+                                            <label for="usr">Email </label>
+                                            <input type="text" class="form-control" id="sender_email" name="sender_email" value="" required>
+                                            <span id="alert_sender_email" class="bold_alert"></span> </div>
+                                        <div class="form-group">
+                                            <label for="usr">Mobile <span class="red">*</span></label>
+                                            <input type="text" class="form-control" id="sender_phone" name="sender_phone" value="" required>
+                                            <span id="alert_sender_phone" class="bold_alert"></span> </div>
+                                        <div class="form-group">
+                                            <label for="usr">Address <span class="red">*</span></label>
+                                            <textarea class="form-control" rows="5" id="sender_address" name="sender_address" required></textarea>
+                                            <span id="alert_sender_address" class="bold_alert"></span> </div>
+                                    </div>
+                                </div>
+                                <!--==================================Delivery address========================================-->
+                                <div class="col-md-6">
+                                    <div class="colle_box">
+                                        <h2>2. Delivery Address</h2>
+                                        <div class="form-group">
+                                            <label for="usr">Name <span class="red">*</span></label>
+                                            <input type="text" class="form-control" id="reciever_name" name="reciever_name" required>
+                                            <span id="alert_reciever_name" class="bold_alert"></span> </div>
+                                        <div class="form-group">
+                                            <label for="usr">Email </label>
+                                            <input type="text" class="form-control" id="reciever_email" name="reciever_email" required>
+                                            <span id="alert_reciever_email" class="bold_alert"></span> </div>
+                                        <div class="form-group">
+                                            <label for="usr">Mobile <span class="red">*</span></label>
+                                            <input type="text" class="form-control" id="reciever_phone" name="reciever_phone" required>
+                                            <span id="alert_reciever_phone" class="bold_alert"></span> </div>
+                                        <div class="form-group">
+                                            <label for="usr">Address <span class="red">*</span></label>
+                                            <textarea class="form-control" rows="5" id="reciever_address" name="reciever_address" required></textarea>
+                                            <span id="alert_reciever_address" class="bold_alert"></span> </div>
+                                    </div>
+                                </div>
+                                <!--============================================================================================-->
+                            </div>
+
+                            <div class="row">
+                                <div class="control-group">
+                                    <input type="submit" class="btn btn-info" name="submit1" value="submit" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </form>
+
+        <?php } else{?>
+        <h2>Sorry , No record found</h2>
+        <?php }?>
+    </section>
+
+
+
+
+
+
+
+
+
+    <div class="clearfix"></div>
+
+
+    <?php include("inc/footer.html")?>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+
+
+    <script>
+        function proceed() {
+            $("#addressinfo").hide();
+            var length = $("#length").val();
+            var width = $("#width").val();
+            var height = $("#height").val();
+
+            var pickup_pincode = '<?=$pickup_pincode?>';
+            var delivery_pincode = '<?=$delivery_pincode?>';
+
+
+            $error = 0;
+            if (length == '') {
+                alert("Enter length");
+                $error = 1;
+            }
+            if (width == '') {
+                alert("Enter width");
+                $error = 1;
+            }
+            if (height == '') {
+                alert("Enter height");
+                $error = 1;
+
+            }
+
+            if ($error == 0) {
+                var formURL = "ajax/calculation.html";
+                $('#result').html('Price calculating plz wait...');
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data: {
+                        length: length,
+                        width: width,
+                        height: height,
+                        pickup_pincode: pickup_pincode,
+                        delivery_pincode: delivery_pincode
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        $('#result').html(data);
+                        $("#addressinfo").show();
+                    }
+                });
+
+            }
+
+
+        }
+
+
+
+
+        $('#frmsubmit').validate({
+            rules: {
+                "length": {
+                    required: true
+                },
+                "width": {
+                    required: true
+                },
+                "height": {
+                    required: true
+                },
+                "weight": {
+                    required: true
+                },
+                "piece": {
+                    required: true
+                },
+
+            },
+            messages: {
+                "length": "Required",
+                "width": "Required",
+                "height": "Required",
+                "weight": "Required",
+                "piece": "Required",
+
+            },
+
+            submitHandler: function(form, event) {
+                event.preventDefault();
+
+            }
+        });
+
+        function cleardatavalue() {
+
+            $('#result').html('');
+            $("#addressinfo").hide();
+
+        }
+        $(document).ready(function() {
+            $('input:text[name="length"]').bind('keyup blur', function() {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
+            $('input:text[name="width"]').bind('keyup blur', function() {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
+            $('input:text[name="height"]').bind('keyup blur', function() {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
+            $('input:text[name="weight"]').bind('keyup blur', function() {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
+            $('input:text[name="piece"]').bind('keyup blur', function() {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
+
+
+        });
+    </script>
+    <style>
+        .error {
+            color: red !important;
+        }
+    </style>
+
+</body>
+
+</html>

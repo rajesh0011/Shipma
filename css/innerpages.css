@@ -1,0 +1,112 @@
+.banner-section{
+	width: 100%;
+    background-image: linear-gradient(to bottom, #000000e3, #f717352b), url(../img/banner.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    background-repeat: no-repeat;
+}
+.banner-section h1{
+	font-weight: 700;
+    font-size: 60px;
+    color: #fff;
+    padding-top: 3em;
+    text-align: center!important;
+}
+
+#contact-us{
+  width: 100%;
+    background-image: linear-gradient(to bottom, #000000e3, #f717352b), url(../img/contact-banner.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    background-repeat: no-repeat;
+}
+#contact-us h1{
+  font-weight: 700;
+    font-size: 60px;
+    color: #fff;
+    padding-top: 3em;
+    text-align: center!important;
+}
+.section-padding {
+    padding: 100px 0;
+    position: relative;
+}
+.our-contact-us2 .heading-minimal {
+    margin-bottom: 20px;
+}
+
+.heading-minimal {
+    text-align: center;
+    margin-bottom: 55px;
+    position: relative;
+    z-index: 1;
+}
+.heading-minimal .head-title {
+    padding-top: 0;
+    margin-bottom: 15px;
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding-bottom: 20px;
+}
+.heading-minimal .head-title::after {
+    position: absolute;
+    content: attr(data-title);
+    color: rgba(210,210,210,.3);
+    font-weight: 900;
+    font-size: 90px;
+    text-transform: uppercase;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    z-index: -1;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.our-contact-us2 .footer-address h6 {
+    font-size: 16px;
+    text-transform: capitalize;
+}
+.our-contact-us2 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.our-contact-us2 span a {
+    color: #f71735;
+}
+.our-contact-us2 h5 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+div.wpcf7 .screen-reader-response {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.our-contact-us2 .form-control {
+    border-radius: .25rem;
+    box-shadow: none;
+    color: #8d8d8d;
+    font-size: 14px;
+    background: #f8f8f8;
+    height: auto;
+    padding: 10px 20px 10px 20px;
+    transition: all 0.2s cubic-bezier(0, 0, .58, 1) 0s;
+    border: 1px solid #e1e6eb;
+}
+
+/*.raj h1{
+  background: conic-gradient(from 90deg, #fff, #000);
+  padding: 10em;
+  border-radius: 50%
+}*/
